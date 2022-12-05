@@ -77,7 +77,7 @@ public class Camera {
 	}
 	
 	private void moveFromLook(float speedX, float speedY, float speedZ) {
-		/*
+		
 		float newX = Shadows.cameraLocation.x;
 		float newZ = Shadows.cameraLocation.z;
 		
@@ -97,7 +97,7 @@ public class Camera {
 		if (newZ >= 0.3f && newZ <= 127.7f) {
 			Shadows.cameraLocation.z = newZ;
 		}
-		*/
+		
 	}
 	
 	public static boolean isColliding(float newX, float newY, float newZ) {

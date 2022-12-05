@@ -82,7 +82,7 @@ public abstract class Robot extends BaseEntity {
 		selectionZ = (int) (selection.x + Shadows.cameraLocation.z);
 		
 		if (Mouse.isButtonDown(1) && !Camera.isColliding(selectionX, 0.5f, selectionZ) && System.currentTimeMillis() - lastPlacementOfRobot > 500) {
-			createRobot(selectionX, selectionZ, null);
+			createRobot(selectionX, selectionZ, new Color(0, 0, 0, 1));
 			lastPlacementOfRobot = System.currentTimeMillis();
 		}
 	}

@@ -436,7 +436,7 @@ public class Shadows implements Runnable{
 			
 			glUniform1i(glGetUniformLocation(shader, "state"), 0);
 		}
-		/*
+		
 		
 		for (String s : LocationThread.playerNames) {
 			Player p = LocationThread.playerMap.get(s);
@@ -463,7 +463,7 @@ public class Shadows implements Runnable{
 				it.remove();
 			}
 		}
-		*/
+		
 		
 		//do stuff with robots
 		Robot.updateRobots(g.delta);

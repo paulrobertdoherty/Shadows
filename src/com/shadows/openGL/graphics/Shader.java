@@ -35,7 +35,6 @@ public class Shader {
 			glShaderSource(vertexShader, vertexShaderSource);
 			glCompileShader(vertexShader);
 			System.out.println("Vertex shader log: " + getShaderLog(vertexShader));
-			
 			if (glGetShader(vertexShader, GL_COMPILE_STATUS) == GL_FALSE) {
 				throw new LWJGLException("The vertex shader was not compiled correctly.");
 			}
