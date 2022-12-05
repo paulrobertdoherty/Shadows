@@ -1,0 +1,6 @@
+features:
+	better movement
+	buttons, which deactivate or activate anything
+	more minor color changes
+	
+completed:

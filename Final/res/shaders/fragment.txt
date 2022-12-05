@@ -1,0 +1,70 @@
+#version 120
+
+uniform sampler2D lookup;
+uniform sampler2DShadow shadow;
+uniform int state;
+
+varying float varyingX;
+varying float varyingY;
+varying float varyingZ;
+varying vec4 vertexColor;
+varying vec4 texCoord;
+varying vec3 vertexNormal;
+varying vec3 vertexLightPosition;
+
+float interpolate(float one, float two, float between) {
+	if (between < 0) {
+		between = 0;
+	}
+	
+	float ft = between * 3.141592653589793;
+	float f = (1 - cos(ft)) * 0.5;
+		
+	return one*(1-f)+two*f;
+}
+
+vec4 toVec4(float num) {
+	return vec4(num, num, num, 1);
+}
+
+vec4 applyLighting(vec4 color) {
+	return color * ((mod(varyingZ, 17.0) / 17.0) + 0.5);
+}
+
+vec4 applyFog(vec4 color) {
+	float z = ((gl_FragCoord.z / gl_FragCoord.w) - 10) / 10.0;
+	
+	float r = interpolate(color.r, 0.5294117647, z);
+	float g = interpolate(color.g, 0.80784313725, z);
+	float b = interpolate(color.b, 0.98039215686, z);
+	return vec4(r, g, b, 1);
+}
+
+vec4 applyShadow(vec4 color) {
+	float shadowValue = 1;
+	
+	if (texCoord.w > 1.0) {
+		shadowValue = shadow2DProj(shadow, texCoord).w;
+	}
+	
+	if (shadowValue < 0.5) {
+		shadowValue = 0.5;
+	}
+	
+	return color * shadowValue;
+}
+
+void main() {
+	vec4 color;
+	if (state == 1) {
+		color = texture2D(lookup, vec2(varyingX, varyingZ));
+	} else if (state == 0) {
+		color = applyLighting(vertexColor);
+	} else if (state == 2) {
+		color = vertexColor;
+		gl_FragColor = applyFog(color);
+		return;
+	}
+	
+	gl_FragColor = applyFog(applyShadow(color));
+}

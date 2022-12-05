@@ -1,0 +1,19 @@
+#version 120
+
+varying float varyingX;
+varying float varyingY;
+varying float varyingZ;
+varying vec4 texCoord;
+varying vec4 vertexColor;
+varying vec3 normal;
+varying vec3 vertexLightPosition;
+
+void main() {
+	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	texCoord = gl_TextureMatrix[1] * gl_Vertex;
+	varyingX = gl_Vertex.x;
+	varyingY = gl_Vertex.y;
+	varyingZ = gl_Vertex.z;
+	vertexColor = gl_Color;
+	normal = gl_Normal;
+}

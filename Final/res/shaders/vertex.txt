@@ -1,0 +1,20 @@
+#version 120
+
+varying float varyingX;
+varying float varyingY;
+varying float varyingZ;
+varying vec4 texCoord;
+varying vec4 vertexColor;
+varying vec3 vertexNormal;
+varying vec3 vertexLightPosition;
+
+void main() {
+	gl_Position = ftransform();
+	texCoord = gl_TextureMatrix[1] * gl_Vertex;
+	varyingX = gl_Vertex.x;
+	varyingY = gl_Vertex.z;
+	varyingZ = gl_Vertex.z;
+	vertexNormal = normalize(gl_NormalMatrix * gl_Normal);
+	vertexLightPosition = normalize(gl_LightSource[0].position.xyz - (gl_ModelViewMatrix * gl_Vertex).xyz);
+	vertexColor = gl_Color;
+}
